@@ -1,0 +1,69 @@
+<div class="container ">
+    <div class="input-group mb-2 mt-2">
+        <input type="text" placeholder="Search" class="form-control" aria-label="Text input with dropdown button"
+            [(ngModel)]="sortingArg.filterBy">
+        <div class="input-group-append">
+            <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false">Sort By {{sortingArg.sortBy}}</button>
+            <div class="dropdown-menu">
+                <ng-container *ngFor=" let element of products[0] | keyvalue">
+                    <a class="dropdown-item" *ngIf="![ 'images' , 'thumbnail','id','price'].includes(element.key)"
+                        (click)="sortingArg.sortBy = element.key">{{element.key[0].toLocaleUpperCase() +element.key.slice(1)}}</a>
+                </ng-container>
+            </div>
+        </div>
+        <div class="input-group-append">
+            <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false"> Order
+                <svg *ngIf="sortingArg.sortDir === 'asc' ; else elseContent" xmlns="http://www.w3.org/2000/svg"
+                    width="16" height="16" fill="currentColor" class="bi bi-arrow-up" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd"
+                        d="M8 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L7.5 2.707V14.5a.5.5 0 0 0 .5.5z" />
+                </svg>
+                <ng-template #elseContent><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                        fill="currentColor" class="bi bi-arrow-down" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd"
+                            d="M8 1a.5.5 0 0 1 .5.5v11.793l3.146-3.147a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 .708-.708L7.5 13.293V1.5A.5.5 0 0 1 8 1z" />
+                    </svg></ng-template>
+
+            </button>
+            <div class="dropdown-menu">
+                <a class="dropdown-item" (click)="sortingArg.sortDir = 'asc'">Asc <svg
+                        xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                        class="bi bi-arrow-up" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd"
+                            d="M8 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L7.5 2.707V14.5a.5.5 0 0 0 .5.5z" />
+                    </svg> </a>
+                <div role="separator" class="dropdown-divider"></div>
+                <a class="dropdown-item" (click)="sortingArg.sortDir = 'desc'">Desc
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                        class="bi bi-arrow-down" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd"
+                            d="M8 1a.5.5 0 0 1 .5.5v11.793l3.146-3.147a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 .708-.708L7.5 13.293V1.5A.5.5 0 0 1 8 1z" />
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-3 col-md-4 col-sm-6 element"  *ngFor="let product of products | sorting: sortingArg ">
+            <div class="card"  >
+                <img class="card-img-top" height="150px" [src]="product.thumbnail" alt="Card image cap"
+                    [routerLink]="['/single',product.id]">
+                <div class="card-body">
+                    <h5 class="card-title">{{product.title}}</h5>
+                    <p class="card-text">{{product.description}}</p>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">Rating - {{product.rating}}</li>
+                    <li class="list-group-item">Category - {{product.category}}</li>
+                </ul>
+
+            </div>
+        </div>
+
+        <div infinite-scroll [infiniteScrollDistance]="1" [infiniteScrollThrottle]="1000" (scrolled)="scroll()"></div>
+
+    </div>
+</div>

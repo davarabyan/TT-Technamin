@@ -1,0 +1,29 @@
+.element {    
+    .card-img-top {
+        transition: 0.5s;
+        object-fit: cover;
+    }
+
+    margin-bottom: 20px;
+    box-sizing: border-box;
+
+    &:hover {
+        box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.12);
+        cursor: pointer;
+
+        .card-img-top {
+            transform: scale(1.05);
+        }
+    }
+
+    .card {
+        height: 100%;
+        overflow: hidden;
+
+        .card-img-top {
+            cursor: pointer;
+            max-height: 200px;
+        }
+    }
+}
+

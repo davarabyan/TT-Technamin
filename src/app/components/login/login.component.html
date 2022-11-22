@@ -1,0 +1,46 @@
+<div class="video-wrapper" style="background-color: black;">
+  <video id="myVideo" src="assets/videos/video.mp4" autoplay [muted]="true" loop></video>
+</div>
+
+<div class="container py-5 h-100">
+  <div class="row d-flex justify-content-center align-items-center h-100">
+    <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+      <div class="card bg-dark text-white" style="border-radius: 1rem;">
+        <div class="card-body p-5 text-center">
+          <div class="mb-md-5 mt-md-4 pb-5">
+            <form [formGroup]="profileForm" (submit)="logIn()">
+              <h2 class="fw-bold mb-2 text-uppercase">Login</h2>
+              <p class="text-white-50 mb-5">Please enter your login and password!</p>
+              <div class="form-outline form-white mb-4">
+                <label class="form-label" for="typeEmailX">User name</label>
+                <input formControlName="userName" type="email" id="typeEmailX" class="form-control form-control-lg" />
+                <div
+                  *ngIf="profileForm.get('userName').invalid && (profileForm.get('userName').dirty || profileForm.get('userName').touched)">
+                  Email is required.
+                </div>
+              </div>
+              <div class="form-outline form-white mb-4">
+                <label class="form-label" for="typePasswordX">Password</label>
+                <input formControlName="password" type="password" id="typePasswordX"
+                  class="form-control form-control-lg" />
+                <div
+                  *ngIf="profileForm.get('password').invalid && (profileForm.get('password').dirty || profileForm.get('password').touched)">
+                  Password is required.
+                </div>
+              </div>
+              <div class="alert alert-danger custon-alert " [class.active]="showToaster"  role="alert">
+                  Wrong Username / password
+                </div>
+              <button class="btn btn-outline-light btn-lg px-5" type="submit"
+                [disabled]="!profileForm.valid">Login</button>
+            </form>
+          </div>
+          <div>
+            <p class="mb-0">Don't have an account? <a class="text-white-50 fw-bold">Sign Up</a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
