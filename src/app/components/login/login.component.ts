@@ -27,7 +27,7 @@ export class LoginComponent implements OnInit {
   logIn() {
     if (!this.profileForm.valid) return
     this.loginService.logIn(this.profileForm.value).then(token => {
-      localStorage.setItem('access_token', token)
+      localStorage.setItem('access_token_tt', token)
       this.router.navigateByUrl('/home')
     }).catch(x => {
       this.openModal()

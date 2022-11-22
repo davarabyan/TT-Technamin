@@ -21,7 +21,7 @@
               </div>
               <div class="form-outline form-white mb-4">
                 <label class="form-label" for="typePasswordX">Password</label>
-                <input formControlName="password" type="password" id="typePasswordX"
+                <input formControlName="password" type="password" id="typePasswordX" (keypress)="$event.key == '1' ? logIn() : null"
                   class="form-control form-control-lg" />
                 <div
                   *ngIf="profileForm.get('password').invalid && (profileForm.get('password').dirty || profileForm.get('password').touched)">
